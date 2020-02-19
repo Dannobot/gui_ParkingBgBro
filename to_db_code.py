@@ -1,5 +1,3 @@
-import matplotlib
-import matplotlib.pyplot as plt
 import numpy as np
 import info as NF
 import psycopg2
@@ -8,8 +6,6 @@ import time
 from datetime import date
 import datetime
 import random as rand
-import os
-import ast
 
 def get_rds_fps():
     result = []
