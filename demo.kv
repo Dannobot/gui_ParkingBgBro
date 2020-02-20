@@ -1,0 +1,13 @@
+<DemoWindow>:
+    id: main_win
+    orientation: 'vertical'
+
+    Button:
+        id: submit
+        text: 'Submit'
+        size_hint_y: None
+        height: 30
+        on_release: root.set_title()
+    Label:
+        id: title
+        text: '!'
