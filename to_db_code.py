@@ -63,8 +63,33 @@ def norm_rds(t, a, it):
         cursor.execute('UPDATE tabletutu SET parkingplaces = %s WHERE id = %s', (jsn_b, it))
         cursor.execute('UPDATE tabletutu SET json_park = %s WHERE id = %s', (jsn_c, it))
         conn.commit()
+
+def dick_head(id):
+    result = []
+    conn = psycopg2.connect(dbname=NF.dbName, user=NF.user, password=NF.password, host=NF.host)
+    with conn.cursor() as cursor:
+        cursor.execute(f'SELECT parking, parkingplaces FROM tabletutu WHERE id = {id}')
+        records = cursor.fetchall()
+        conn.commit()
+    for i in records:
+        result.append(i)
+    return result
+
+def norm(a, t, it):
+    conn = psycopg2.connect(dbname=NF.dbName, user=NF.user, password=NF.password, host=NF.host)
+    jsn_a = json.dumps(a)
+    jsn_b = json.dumps(t)
+    with conn.cursor() as cursor:
+        cursor.execute('UPDATE tabletutu SET parking_n = %s WHERE id = %s', (jsn_a, it))
+        cursor.execute('UPDATE tabletutu SET parkingplaces_n = %s WHERE id = %s', (jsn_b, it))
+        conn.commit()
+
     
 if __name__ == '__main__':
+    id = 270013
+    a = dick_head(id)
+    print(a[0][0])
+    norm(a[0][0], a[0][1], id)
     # parks = os.listdir('city_txt')
     # for i in parks:
     #     if i.split('.')[-1]=='txt':
@@ -97,7 +122,7 @@ if __name__ == '__main__':
     #     cursor.close()
     # print(result)
     # for i in result:
-    test(1,2)
+    # test(1,2)
     # print('DONE')
 
     # get_rds_fps()
