@@ -110,11 +110,9 @@ class TestWindow(BoxLayout):
             if str(child).find('BoxLayout') > -1:
                 image_container = child.children[0]
                 cur_img = image_container.source
-
         for i, img in enumerate(images):
             if img == cur_img:
                 cur_idx = i
-
         if cur_idx != 0:
             prev_img = images[cur_idx - 1]
         else:
@@ -138,7 +136,6 @@ class TestWindow(BoxLayout):
         for i, img in enumerate(images):
             if img == cur_img:
                 cur_idx = i
-
         if cur_idx != last_idx:
             nxt_img = images[cur_idx + 1]
         else:

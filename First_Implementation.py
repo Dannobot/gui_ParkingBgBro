@@ -137,9 +137,9 @@ def poroh(h, w, x, y, alfa):
         if i[2] == re:
             g = 40.5877603
             z = -73.9526928
-            PMHLt = float(i[0][0]) + (-0.000672*2)
+            PMHLt = float(i[0][0]) + (-0.000572*2)
             PMWLn = float(i[0][1]) + (0.000886*2)
-            PZHLt = float(i[0][0]) + (0.000672*2)
+            PZHLt = float(i[0][0]) + (0.000572*2)
             PZWLn = float(i[0][1]) + (-0.000886*2)
             KH = (PMHLt-PZHLt)/h
             KW = (PMWLn-PZWLn)/w
@@ -151,10 +151,10 @@ def poroh(h, w, x, y, alfa):
 
 
 if __name__ == '__main__':
-    for i in os.listdir('/home/dannobot/Use'):
-        if i.split('-')[1] == 'New York':
+    for i in os.listdir('D:/PythonFolder/kivy_gui/gui_ParkingBgBro/Use/12'):
+        if i.split('-')[1] == 'Lviv':
             global re, kilk
-            img = cv2.imread(f'/home/dannobot/Use/{i}', cv2.IMREAD_COLOR)
+            img = cv2.imread(f'D:/PythonFolder/kivy_gui/gui_ParkingBgBro/Use/12/{i}', cv2.IMREAD_COLOR)
             zeros = np.zeros((150, 150, 3))
             imgCopy = zeros.copy()
             ananas = get_by_city_fps(i.split('-')[1])

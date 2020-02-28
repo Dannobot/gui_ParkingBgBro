@@ -86,10 +86,24 @@ def norm(a, t, it):
 
     
 if __name__ == '__main__':
-    id = 270013
+    nX = 49.774020610134535
+    nY = 24.011364488781343
+    id = 88
     a = dick_head(id)
-    print(a[0][0])
+    riznX = a[0][0][0]['lat'] - nX
+    riznY = a[0][0][0]['lng'] - nY
+    # As = a[0][0]
+    # Ap = a[0][1]
+    # for i in range(len(As)):
+    #     As[i]['lat'] = As[i]['lat'] - riznX
+    #     As[i]['lng'] = As[i]['lng'] - riznY
+    # for i in range(len(Ap)):
+    #     for j in range(4):
+    #         Ap[i][j]['lat'] = Ap[i][j]['lat'] - riznX
+    #         Ap[i][j]['lng'] = Ap[i][j]['lng'] - riznY
+
     norm(a[0][0], a[0][1], id)
+    # norm(As, Ap, id)
     # parks = os.listdir('city_txt')
     # for i in parks:
     #     if i.split('.')[-1]=='txt':

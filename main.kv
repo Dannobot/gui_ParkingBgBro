@@ -1,21 +1,35 @@
-#<ImgCard@ToggleButtonBehavior+BoxLayout>:
-#    im_source: ''
-#    im_caption: ''
-#    orientation: 'vertical'
-#    on_release: app.root.viewimg(self)
-#    Image:
-#        source: root.im_source
-#        size_hint_y: .9
-#    Label:
-#        text: root.im_caption
-#        size_hint_y: .1
+<ImgCard@ToggleButtonBehavior+BoxLayout>:
+    im_source: ''
+    im_caption: ''
+    orientation: 'vertical'
+    on_release: app.root.view_img(self)
+    Image:
+        source: root.im_source
+        size_hint_y: .9
+    Label:
+        text: root.im_caption
+        size_hint_y: .1
+
+<ViewImage>
+    id: main_image
+    orientation: 'vertical'
+
+    BoxLayout:
+        Slider:
+            id: slider
+            min: -50
+            max: 50
+            step: 1
+            orientation: 'vertical'
+        Label:
+            text: str(slider.value)
 
 
 <MainWindow>:
     id: main_win
     orientation: 'vertical'
 #    size_hint_y: 1.085
-    file_dropdown: file_dropdown.__self__
+#    file_dropdown: file_dropdown.__self__
 
     ScreenManager:
         id: scrn_mngr
@@ -35,38 +49,51 @@
 
                     Button:
                         id: file_trigga
-                        text: 'File'
+                        text: 'Open Folder'
                         size_hint: (.1, None)
                         height: 30
-                        on_release: file_dropdown.open(self)
+                        on_release: scrn_mngr.current = 'open_media'
+#                        on_release: file_dropdown.open(self)
 
-                        Widget:
-                            on_parent: file_dropdown.dismiss()
-
-                            DropDown:
-                                id: file_dropdown
-                                Button:
-                                    id: open_im
-                                    text: 'Open Image'
-                                    size_hint_y: None
-                                    height: 30
-                                    on_release: scrn_mngr.current = 'open_media'
-                                    on_release: open_media.trigger = 'image'
-                                Button:
-                                    id: open_fold
-                                    text: 'Open Folder'
-                                    size_hint_y: None
-                                    height: 30
-                                    on_release: scrn_mngr.current = 'open_media'
+#                        Widget:
+#                            on_parent: file_dropdown.dismiss()
+#
+#                            DropDown:
+#                                id: file_dropdown
+#                                Button:
+#                                    id: open_im
+#                                    text: 'Open Image'
+#                                    size_hint_y: None
+#                                    height: 30
+#                                    on_release: scrn_mngr.current = 'open_media'
+##                                    on_release: open_media.trigger = 'image'
+#                                Button:
+#                                    id: open_fold
+#                                    text: 'Open Folder'
+#                                    size_hint_y: None
+#                                    height: 30
+#                                    on_release: scrn_mngr.current = 'open_media'
                     Label:
                         size_hint: (.9, None)
                         height: 30
                         bold: True
 
-                BoxLayout:
-                    id: header
-                    orientation: 'horizontal'
+                RecycleView:
+                    id: img_base
+                    viewclass: 'ImgCard'
+                    RecycleGridLayout:
+                        default_size: (None, 250)
+                        default_size_hint: (1, None)
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 10
+                        cols: 4
+
+#                BoxLayout:
+#                    id: header
+#                    orientation: 'horizontal'
 #                    size_hint_y: .1
+
         Screen:
             id: open_media
             name: 'open_media'
@@ -78,13 +105,13 @@
                     height: 35
                     TextInput:
                         id: current_path
-                        text: chooser.selection[0] if open_media.trigger == 'image' and len(chooser.selection) > 0 else chooser.path
+                        text: chooser.path #chooser.selection[0] if open_media.trigger == 'image' and len(chooser.selection) > 0 else chooser.path
                         size_hint_x: .8
                     Button:
                         id: submit
                         text: 'Open'
                         size_hint_x: .2
-#                        on_release: root.get_image(current_path.text) if open_media.trigger == 'image' else root.get_folder(current_path.text)
+                        on_release: root.get_image(current_path.text)
                 FileChooserIconView:
                     id: chooser
 
